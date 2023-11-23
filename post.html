@@ -9,7 +9,6 @@
   <meta name="author" content="">
 
   <title> | Александр Simple Ковязин |</title>
-  <link rel="shortcut icon" href="img/stevejobs.ico" />
 
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,10 +18,10 @@
     rel='stylesheet' type='text/css'>
 
   <link href="css/clean-blog.min.css" rel="stylesheet">
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
-<body>
+<body style="background-color: rgb(201, 201, 201);">
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -42,6 +41,27 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="post.html">Вклад в киберспорт</a>
+          </li>
+          <li class="nav-item">
+            <div class="center-wrapper">
+              <style>
+                #startSnowfall {
+                    padding: 10px 20px;
+                    font-size: 10px;
+                    background-color: #000000; 
+                    color: #ffffff; 
+                    border: none;
+                    border-radius: 10px; 
+                    cursor: pointer;
+                    transition: background-color 1s;
+                }
+            
+                #startSnowfall:hover {
+                    background-color: #ffffff;
+                }
+            </style>
+              <button id="startSnowfall" class="copyright text-muted">НОВОГОДНИЙ СТИЛЬ</button>
+            </div>
           </li>
         </ul>
       </div>
@@ -175,78 +195,28 @@
       color: #333;
     }
   </style>
-</head>
-<body>
-
-  <div class="container">
-    <h1>Можете оставить оценку</h1>
+    <script src='snowfall.js'></script>
+    <script src="js/snowfall.js"></script>
+    <script type="text/javascript">
+     var snowfallActive = false;
   
-    <div class="rating-container" id="ratingContainer">
-      <span class="star" onclick="rate(1)">★</span>
-      <span class="star" onclick="rate(2)">★</span>
-      <span class="star" onclick="rate(3)">★</span>
-      <span class="star" onclick="rate(4)">★</span>
-      <span class="star" onclick="rate(5)">★</span>
-    </div>
-  
-    <div class="thank-you-message" id="thankYouMessage">Спасибо за ваш отзыв и оценку!</div>
-  
-    <div class="average-rating" id="averageRating">Средняя оценка: <span id="averageValue">0</span></div>
-    <div class="average-rating" id="totalRatings">Количество оценок: <span id="totalRatingsValue">0</span></div>
-  </div>
-  
-  <script>
-    let rated = false;
-    let totalRatings = 0;
-    let totalStars = 0;
-  
-    function rate(stars) {
-      if (!rated) {
-        console.log('User rated:', stars); 
-        totalRatings++;
-        totalStars += stars; 
-        updateAverageRating(); 
-        document.getElementById('thankYouMessage').style.display = 'block';
-        rated = true;
+  // Функция, которая будет вызываться при нажатии на кнопку "Снег"
+  function toggleSnowfall() {
+      if (snowfallActive) {
+          $(document).snowfall('clear');
+      } else {
+          $(document).snowfall({image: "img/snow4.png", minSize: 10, maxSize: 20});
       }
-    }
+      snowfallActive = !snowfallActive;
+  }
   
-    function updateAverageRating() {
-      const averageRating = totalRatings === 0 ? 0 : (totalStars / totalRatings).toFixed(1);
-      document.getElementById('averageValue').textContent = averageRating;
-      document.getElementById('totalRatingsValue').textContent = totalRatings;
-    }
-
-    // Обновление цвета звезд после выбора
-    const stars = document.querySelectorAll('.star');
-    stars.forEach((star, index) => {
-      star.addEventListener('mouseover', () => {
-        if (!rated) {
-          resetStarsColor();
-          colorStars(index + 1);
-        }
+  // Ожидание события "click" на кнопке "Снег" и вызов функции toggleSnowfall
+  $(document).ready(function () {
+      $('#startSnowfall').on('click', function () {
+          toggleSnowfall();
       });
-
-      star.addEventListener('mouseout', () => {
-        if (!rated) {
-          resetStarsColor();
-        }
-      });
-    });
-
-    function resetStarsColor() {
-      stars.forEach(star => {
-        star.classList.remove('active');
-      });
-    }
-
-    function colorStars(count) {
-      for (let i = 0; i < count; i++) {
-        stars[i].classList.add('active');
-      }
-    }
+  });
   </script>
-  
-</body>
+</head>
 
 </html>

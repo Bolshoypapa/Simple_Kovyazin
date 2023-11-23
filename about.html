@@ -17,7 +17,7 @@
     rel='stylesheet' type='text/css'>
 
   <link href="css/clean-blog.min.css" rel="stylesheet">
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <style>
     p.introduction:first-letter {
 	font-size:4.2em;
@@ -28,7 +28,8 @@
   </style>
 </head>
 
-<body>
+<body style="background-color: rgb(201, 201, 201);">
+  
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -48,6 +49,27 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="post.html">Вклад в киберспорт</a>
+          </li>
+          <li class="nav-item">
+            <div class="center-wrapper">
+              <style>
+                #startSnowfall {
+                    padding: 10px 20px;
+                    font-size: 10px;
+                    background-color: #000000; 
+                    color: #ffffff; 
+                    border: none;
+                    border-radius: 10px; 
+                    cursor: pointer;
+                    transition: background-color 1s;
+                }
+            
+                #startSnowfall:hover {
+                    background-color: #ffffff;
+                }
+            </style>
+              <button id="startSnowfall" class="copyright text-muted">НОВОГОДНИЙ СТИЛЬ</button>
+            </div>
           </li>
         </ul>
       </div>
@@ -73,7 +95,7 @@
   <div class="container">
     <div class="row text-justify">
       <article>
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-lg-8 col-md-10 mx-auto" >
           <p class="introduction">Алекса́ндр Дмитриевич Ковязин (Россия Белая Холуница) — российский киберспортсмен, более известный под ником s1mple.
              Играет в команде Natus Vincere. Лучший игрок в дисциплине Counter-Strike: Global Offensive по версии портала HLTV.org по итогам 2018, 2021 и 2022 годов.
               В 2021 году в составе Natus Vincere стал победителем и MVP PGL Major Stockholm 2021. Карьера Ковязина началась в 2013 году. Он побывал в таких коллективах
@@ -125,7 +147,28 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script src="js/clean-blog.min.js"></script>
+  <script src='snowfall.js'></script>
+  <script src="js/snowfall.js"></script>
+  <script type="text/javascript">
+   var snowfallActive = false;
 
+// Функция, которая будет вызываться при нажатии на кнопку "Снег"
+function toggleSnowfall() {
+    if (snowfallActive) {
+        $(document).snowfall('clear');
+    } else {
+        $(document).snowfall({image: "img/snow4.png", minSize: 10, maxSize: 20});
+    }
+    snowfallActive = !snowfallActive;
+}
+
+// Ожидание события "click" на кнопке "Снег" и вызов функции toggleSnowfall
+$(document).ready(function () {
+    $('#startSnowfall').on('click', function () {
+        toggleSnowfall();
+    });
+});
+</script>
 </body>
 
 </html>
