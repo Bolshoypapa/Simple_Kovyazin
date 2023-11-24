@@ -142,25 +142,60 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <script src="js/clean-blog.min.js"></script>
-  <h2>Оставьте свой отзыв</h2>
-  <form id="reviewForm">
-      <label for="review">Ваш отзыв:</label>
-      <textarea id="review" required></textarea>
-      <br>
-      <button type="button" onclick="submitReview()">Отправить отзыв</button>
-  </form>
+  <h1>Отзывы</h1>
+
+  <!-- Форма для ввода отзыва -->
+  <textarea id="review" rows="4" cols="50" placeholder="Напишите ваш отзыв..."></textarea>
+  <br>
+  <button onclick="submitReview()">Отправить отзыв</button>
+
+  <!-- Секция для отображения сохраненных отзывов -->
+  <h2>Сохраненные отзывы:</h2>
+  <ul id="reviewList"></ul>
+
   <script>
+    // Функция для сохранения отзывов
     function submitReview() {
-        // Получение значения отзыва
-        var userReview = document.getElementById('review').value;
+      var userReview = document.getElementById('review').value;
 
-        // Отправка отзыва (здесь может быть AJAX запрос на сервер)
-        console.log('Пользователь оставил отзыв: ' + userReview);
+      // Получение сохраненных отзывов из localStorage
+      var savedReviews = JSON.parse(localStorage.getItem('savedReviews')) || [];
 
-        // Вывод благодарности пользователю
-        alert('Спасибо за отзыв!');
+      // Добавление нового отзыва в массив
+      savedReviews.push(userReview);
+
+      // Сохранение обновленного массива обратно в localStorage
+      localStorage.setItem('savedReviews', JSON.stringify(savedReviews));
+
+      // Вывод благодарности пользователю
+      alert('Спасибо за отзыв!');
+
+      // Очистка текстового поля после отправки
+      document.getElementById('review').value = '';
+
+      // Обновление отображения сохраненных отзывов на странице
+      displayReviews();
     }
-</script>
+
+    // Функция для отображения сохраненных отзывов на странице
+    function displayReviews() {
+      var savedReviews = JSON.parse(localStorage.getItem('savedReviews')) || [];
+      var reviewList = document.getElementById('reviewList');
+
+      // Очистка текущего содержимого списка отзывов
+      reviewList.innerHTML = '';
+
+      // Добавление каждого отзыва в список
+      savedReviews.forEach(function(review) {
+        var listItem = document.createElement('li');
+        listItem.textContent = review;
+        reviewList.appendChild(listItem);
+      });
+    }
+
+    // Вызов функции для отображения сохраненных отзывов при загрузке страницы
+    displayReviews();
+  </script>
 </body>
 <head>
   
