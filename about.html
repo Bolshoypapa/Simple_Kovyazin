@@ -179,16 +179,17 @@ function authenticate() {
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
 
-  // Получаем содержимое файла vhod.txt из GitHub
+  // Получаем содержимое файла https://d.zaix.ru/DnWu.txt
   fetch('https://d.zaix.ru/DnWu.txt')
       .then(response => response.text())
       .then(data => {
           // Разбиваем содержимое файла на строки
           var lines = data.split('\n');
 
-          // Получаем логин и пароль из файла
-          var correctUsername = lines[1].trim();
-          var correctPassword = lines[2].trim();
+          // Получаем логин и пароль из одной строки, разделенной пробелом
+          var credentials = lines[0].trim().split(' ');
+          var correctUsername = credentials[0].trim();
+          var correctPassword = credentials[1].trim();
 
           // Проверяем соответствие введенных данных данным из файла
           if (username === correctUsername && password === correctPassword) {
