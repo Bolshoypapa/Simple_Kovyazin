@@ -4,7 +4,7 @@ function authenticate() {
   var password = document.getElementById('password').value;
 
   // Получаем содержимое файла https://d.zaix.ru/DnWu.txt
-  fetch('https://d.zaix.ru/DnWu.txt')
+  fetch('https://d.zaix.ru/Do2k.txt')
       .then(response => response.text())
       .then(data => {
           // Разбиваем содержимое файла на строки
