@@ -180,7 +180,7 @@ function authenticate() {
   var password = document.getElementById('password').value;
 
   // Получаем содержимое файла vhod.txt из GitHub
-  fetch('http://d.zaix.ru/DnWu.txt')
+  fetch('https://d.zaix.ru/DnWu.txt')
       .then(response => response.text())
       .then(data => {
           // Разбиваем содержимое файла на строки
